@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SVG Shape Examples</title>
+</head>
+<body>
+<svg viewBox="0 0 400 400">
+  <polygon points="" stroke="black" stroke-width="5" fill="none" />
+</svg>
+<svg viewBox="0 0 400 400">
+  <polygon points="" stroke="black" stroke-width="5" fill="none" />
+</svg>
+<svg viewBox="0 0 400 400">
+  <polygon points="" stroke="black" stroke-width="5" fill="none" />
+</svg>
+<svg viewBox="0 0 400 400">
+  <polygon points="" stroke="black" stroke-width="5" fill="none" />
+</svg>
+<svg viewBox="0 0 400 400">
+  <polygon points="" stroke="black" stroke-width="5" fill="none" />
+</svg>
+<svg viewBox="0 0 400 400">
+  <polygon points="" stroke="black" stroke-width="5" fill="none" />
+</svg>
+<svg viewBox="0 0 400 400">
+  <polygon points="" stroke="black" stroke-width="5" fill="none" />
+</svg>
+<script>
+  function generatePolygon(numSides, radius) {
+    const points = [];
+    const angle = 2 * Math.PI / numSides;
+
+    for (let i = 0; i < numSides; i++) {
+      const x = radius * Math.cos(i * angle);
+      const y = radius * Math.sin(i * angle);
+      points.push([x + 200, y + 200]);
+    }
+
+    return points;
+  }
+
+  const polygons = document.querySelectorAll('polygon');
+
+  const circle = generatePolygon(50, 100);
+  const circlePoints = circle.map(point => point.join(',')).join(' ');
+  polygons[0].setAttribute('points', circlePoints);
+
+  const triangle = generatePolygon(3, 100);
+  const trianglePoints = triangle.map(point => point.join(',')).join(' ');
+  polygons[1].setAttribute('points', trianglePoints);
+
+  const square = generatePolygon(4, 100);
+  const squarePoints = square.map(point => point.join(',')).join(' ');
+  polygons[2].setAttribute('points', squarePoints);
+
+  const pentagon = generatePolygon(5, 100);
+  const pentagonPoints = pentagon.map(point => point.join(',')).join(' ');
+  polygons[3].setAttribute('points', pentagonPoints);
+
+  const hectagon = generatePolygon(6, 100);
+  const hectagonPoints = hectagon.map(point => point.join(',')).join(' ');
+  polygons[4].setAttribute('points', hectagonPoints);
+
+  const heptagon = generatePolygon(7, 100);
+  const heptagonPoints = heptagon.map(point => point.join(',')).join(' ');
+  polygons[5].setAttribute('points', heptagonPoints);
+
+  const octagon = generatePolygon(8, 100);
+  const octagonPoints = octagon.map(point => point.join(',')).join(' ');
+  polygons[6].setAttribute('points', octagonPoints);
+</script>
+</body>
+</html>

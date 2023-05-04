@@ -21,10 +21,10 @@ function resizeGameBoard() {
     const boardHeight = tileSize * 2;
     const board = document.getElementById('game-board');
     board.style.width = boardWidth + 'px';
-    board.style.height = boardHeight + 'px';
+    board.style.height = (boardHeight) + 'px';
     const boardBody = document.getElementById('game-board-body');
     boardBody.style.width = boardWidth + 'px';
-    boardBody.style.height = (boardHeight - 89) + 'px';
+    boardBody.style.height = (boardHeight) + 'px';
 }
 
 window.onresize = function() {
@@ -71,6 +71,7 @@ function updateGameBoard() {
         const tile = document.getElementById('tile-' + i);
         tile.style.backgroundImage = 'url(img/' + tiles[i].shape + '.png)';
         tile.style.backgroundSize = 'contain';
+        tile.style.backgroundPosition = 'center';
         if (tiles[i].selected) {
             tile.classList.add('selected');
         } else {

@@ -22,6 +22,9 @@ function resizeGameBoard() {
     const board = document.getElementById('game-board');
     board.style.width = boardWidth + 'px';
     board.style.height = boardHeight + 'px';
+    const boardBody = document.getElementById('game-board-body');
+    boardBody.style.width = boardWidth + 'px';
+    boardBody.style.height = (boardHeight - 89) + 'px';
 }
 
 window.onresize = function() {
@@ -82,6 +85,8 @@ function checkMatch() {
     setTimeout(() => {
         if (firstTile.shape === secondTile.shape) {
             alert("You Won");
+            firstTile = null;
+            secondTile = null;
             resetGame();
         } else {
             alert("No");
@@ -115,8 +120,6 @@ for (let i = 0; i < tiles.length; i++) {
     document.getElementById('tile-' + i).addEventListener('click', () => handleTileClick(i));
 }
 
-// Add click event listener to the reset button
-document.getElementById('reset-btn').addEventListener('click', resetGame);
 
 // Reset the game
 resetGame();

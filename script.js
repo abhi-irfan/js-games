@@ -3,9 +3,7 @@ const shapes = ['circle', 'triangle', 'square', 'pentagon', 'hexagon', 'heptagon
 
 // Define the array of tiles
 const tiles = [{id: 0, shape: '', selected: false}, {id: 1, shape: '', selected: false}, {
-    id: 2,
-    shape: '',
-    selected: false
+    id: 2, shape: '', selected: false
 }, {id: 3, shape: '', selected: false}];
 
 // Define the variables to keep track of the selected tiles
@@ -23,11 +21,12 @@ function resizeGameBoard() {
     board.style.width = boardWidth + 'px';
     board.style.height = (boardHeight) + 'px';
     const boardBody = document.getElementById('game-board-body');
-    boardBody.style.width = boardWidth + 'px';
-    boardBody.style.height = (boardHeight) + 'px';
+    const height = document.getElementById("game-board-title").offsetHeight
+    boardBody.style.width = (boardWidth - height) + 'px';
+    boardBody.style.height = (boardHeight - height) + 'px';
 }
 
-window.onresize = function() {
+window.onresize = function () {
     resizeGameBoard()
 }
 resizeGameBoard();
@@ -53,12 +52,12 @@ function resetGame() {
     shuffleShapes();
 
     // Assign the shapes to the tiles
-    for (let i = 0; i < tiles.length-1; i++) {
+    for (let i = 0; i < tiles.length - 1; i++) {
         const shape = shapes[i];
         tiles[i].shape = shape;
         // tiles[i + 1].shape = shape;
     }
-    tiles[tiles.length-1].shape = tiles[Math.floor(Math.random() * 3)].shape
+    tiles[tiles.length - 1].shape = tiles[Math.floor(Math.random() * 3)].shape
     shuffleShapes();
 
     // Update the game board
@@ -84,13 +83,19 @@ function updateGameBoard() {
 // Define the function to check if the selected tiles are a match
 function checkMatch() {
     setTimeout(() => {
-        if (firstTile.shape === secondTile.shape) {
-            alert("You Won");
+        const match = firstTile.shape === secondTile.shape;
+        const message = match ? "User won the game." : "User lost the game.";
+
+        if (typeof MyApp !== "undefined") {
+            window.MyApp[match ? "onSuccess" : "onFailure"](message);
+        } else {
+            console.error("MyApp object is not defined.");
+        }
+        if (match) {
             firstTile = null;
             secondTile = null;
             resetGame();
         } else {
-            alert("No");
             tiles[firstTile.id].selected = false;
             tiles[secondTile.id].selected = false;
             updateGameBoard();
@@ -99,6 +104,7 @@ function checkMatch() {
         }
     }, 500);
 }
+
 
 // Define the function to handle the click event on a tile
 function handleTileClick(tileId) {

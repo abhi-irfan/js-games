@@ -3,29 +3,69 @@ const shapes = ['circle', 'triangle', 'square', 'pentagon', 'hexagon', 'heptagon
 
 // Define the array of tiles
 const tiles = [{id: 0, shape: '', selected: false}, {id: 1, shape: '', selected: false}, {
-    id: 2, shape: '', selected: false
+    id: 2,
+    shape: '',
+    selected: false
 }, {id: 3, shape: '', selected: false}];
-
 // Define the variables to keep track of the selected tiles
 let firstTile = null;
 let secondTile = null;
+$(document).ready(function () {
+
+    const difficulty = findGetParameter("difficulty") ?? 'l';
+
+    if (difficulty === 'l') {
+
+    } else if (difficulty === 'm') {
+        tiles.push({id: 4, shape: '', selected: false});
+        tiles.push({id: 5, shape: '', selected: false});
+    } else if (difficulty === 'h') {
+        tiles.push({id: 4, shape: '', selected: false});
+        tiles.push({id: 5, shape: '', selected: false});
+        tiles.push({id: 6, shape: '', selected: false});
+        tiles.push({id: 7, shape: '', selected: false});
+    }
+    for (let i = 0; i < tiles.length; i++) {
+        const myDiv = document.getElementById("game-board-body");
+        myDiv.innerHTML += `<div class="tile" id="tile-${i}">
+            <div class="overlay"></div>
+        </div>`;
+    }
+
+    // Add click event listeners to the tiles
+    for (let i = 0; i < tiles.length; i++) {
+        document.getElementById('tile-' + i).addEventListener('click', () => handleTileClick(i));
+    }
+    resizeGameBoard()
+
+    // Reset the game
+    resetGame();
+})
 
 
 function resizeGameBoard() {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    const tileSize = Math.min(screenWidth * 0.9 / 2, screenHeight * 0.9 / 2);
-    const boardWidth = tileSize * 2;
-    const boardHeight = tileSize * 2;
+    const tileSize = Math.min(screenWidth * 0.9, screenHeight * 0.9);
+    const boardWidth = tileSize;
+    let boardHeight = tileSize;
     const board = document.getElementById('game-board');
     board.style.width = boardWidth + 'px';
     const boardBody = document.getElementById('game-board-body');
     const height = document.getElementById("game-board-title").offsetHeight + 18
-    if(boardWidth + height < screenHeight) {
+
+    if (tiles.length === 6) {
+        $(".tile").css("width", ((47 * 2) / 3) + "%")
+        boardHeight = boardWidth * 2 / 3 * 1.07
+    } else if (tiles.length === 8) {
+        $(".tile").css("width", ((46 * 2) / 4) + "%")
+        boardHeight = boardWidth * 2 / 4 * 1.1
+    }
+    if (boardWidth + height < screenHeight) {
         boardBody.style.width = (boardWidth) + 'px';
         boardBody.style.height = (boardHeight) + 'px';
-        board.style.height = (boardHeight+height) + 'px';
-    }else {
+        board.style.height = (boardHeight + height) + 'px';
+    } else {
         boardBody.style.width = (boardWidth - height) + 'px';
         boardBody.style.height = (boardHeight - height) + 'px';
         board.style.height = (boardHeight) + 'px';
@@ -123,12 +163,3 @@ function handleTileClick(tileId) {
         checkMatch();
     }
 }
-
-// Add click event listeners to the tiles
-for (let i = 0; i < tiles.length; i++) {
-    document.getElementById('tile-' + i).addEventListener('click', () => handleTileClick(i));
-}
-
-
-// Reset the game
-resetGame();

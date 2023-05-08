@@ -21,43 +21,13 @@
     <script src="js/game_state.js"></script>
     <script src="js/ai.js"></script>
     <script src="js/ui.js"></script>
+    <script src="../global_scripts.js"></script>
     <script src="js/script.js"></script>
 </head>
 
 <body>
-<header>
-    <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse">
-        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-                class="navbar-toggler navbar-toggler-right" data-target="#navbarSupportedContent" data-toggle="collapse"
-                type="button">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item ">
-                    <a class="nav-link" href="#">Easy<span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Medium</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Hard</a>
-                </li>
-            </ul>
-
-            <!-- this is hidden on anything which is larger than md size -->
-            <hr class="d-md-none">
-
-            <form class="form-inline my-2 my-lg-0" style="justify-content: space-between;">
-                <input class="btn my-2 my-sm-0" data-target="#exampleModal" data-toggle="modal" id="how_to_play"
-                       type="button" value="How To Play?">
-                <button aria-disabled="true" class="btn btn-outline-secondary my-2 my-sm-0 disabled">Reset</button>
-            </form>
-        </div>
-    </nav>
-</header>
-<div class="container" id="scoreboard">
+<div class="container" id="scoreboard" style="opacity: 0 !important;">
     <table class="table text-center">
         <tr>
             <td colspan=2>
@@ -80,11 +50,11 @@
     <!-- This code will be injected at runtime from the JS -->
 </div>
 
-<div class="container text-center">
-    <div class="btn" id="restartgame" role="button">
-        Restart Game
-    </div>
-</div>
+<!--<div class="container text-center">-->
+<!--    <div class="btn" id="restartgame" role="button">-->
+<!--        Restart Game-->
+<!--    </div>-->
+<!--</div>-->
 
 <!-- Modal that will be invoked the the player is on a losing/winning streak -->
 <div aria-hidden="true" class="modal fade" id="sledgingModal" role="dialog"

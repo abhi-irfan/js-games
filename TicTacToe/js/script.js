@@ -123,10 +123,17 @@ function updateScores() {
 
 function initializeBoard() {
     logger.log("Entered into initializeBoard");
+    const difficulty = findGetParameter("difficulty") ?? 'l';
+    let rows = "Medium";
+    if (difficulty === 'l') {
+        rows = "Easy";
+    } else if (difficulty === 'm') {
+        rows = "Medium";
+    } else if (difficulty === 'h') {
+        rows = "Hard";
+    }
 
-    var level = $("#navbarSupportedContent").find(".active").children().text();
-
-    GAME_STATE = new cGameState(level);
+    GAME_STATE = new cGameState(rows);
 
     logger.log(GAME_STATE);
 }
@@ -141,7 +148,6 @@ function activateBoard() {
         }
     }
 
-    document.getElementById("restartgame").addEventListener("click", startGame, false);
 
     $("#navbarSupportedContent a").on("click", function () {
         logger.log("Entering to access the difficulty level");

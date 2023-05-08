@@ -114,18 +114,11 @@ UI.displaySledging = function () {
         logger.log("Sledging Status :" + alreadySledgedFlag.toString());
 
         if (winLoseStreak.valueOf() === 2) {
-            setTimeout(function () {
-                $('#sledgingModal').modal('show');
-            }, 5000);
 
             alreadySledgedFlag = 1;
         }
 
         if (winLoseStreak.valueOf() === -2) {
-            setTimeout(function () {
-                document.getElementById('sledgingModalId').innerHTML = "Too hard? Try changing difficulty level(s)";
-                $('#sledgingModal').modal('show');
-            }, 5000);
 
             alreadySledgedFlag = 1;
         }
@@ -165,6 +158,7 @@ UI.updateScreen = function (parGameState) {
                 var div = document.getElementById("x-won");
                 div.style.display = "block";
                 document.getElementById("x-won").addEventListener("click", startGame, false);
+                sendEventToWebView(true,"Player X Won the game")
             }, 4000);
 
             if (winLoseStreak >= 0)
@@ -191,6 +185,7 @@ UI.updateScreen = function (parGameState) {
                 var div = document.getElementById("o-won");
                 div.style.display = "block";
                 document.getElementById("o-won").addEventListener("click", startGame, false);
+                sendEventToWebView(false,"Player O Won the game")
             }, 4000);
 
 
@@ -218,6 +213,7 @@ UI.updateScreen = function (parGameState) {
                 var div = document.getElementById("tie");
                 div.style.display = "block";
                 document.getElementById("tie").addEventListener("click", startGame, false);
+                sendEventToWebView(false,"Its a Tie")
             }, 4000);
 
 

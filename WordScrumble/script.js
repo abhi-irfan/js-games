@@ -904,11 +904,11 @@ resizeGameBoard();
 function getRowsByDifficulty() {
     const difficulty = findGetParameter("difficulty") ?? 'l';
     let rows = 5;
-    if (difficulty == 'l') {
+    if (difficulty === 'l') {
         rows = 5;
-    } else if (difficulty == 'm') {
+    } else if (difficulty === 'm') {
         rows = 7;
-    } else if (difficulty == 'h') {
+    } else if (difficulty === 'h') {
         rows = 9;
     }
     return rows;
@@ -933,16 +933,3 @@ $(function () {
     });
     resizeGameBoard();
 });
-
-function findGetParameter(parameterName) {
-    var result = null,
-        tmp = [];
-    location.search
-        .substr(1)
-        .split("&")
-        .forEach(function (item) {
-            tmp = item.split("=");
-            if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
-        });
-    return result;
-}

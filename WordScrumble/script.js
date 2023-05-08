@@ -13,7 +13,7 @@ function resizeGameBoard() {
     boardBody.style.height = (boardHeight - height) + 'px';
     let rows = getRowsByDifficulty();
     const puzzleWidth = document.getElementById("puzzle").offsetWidth
-    const dimen = ((puzzleWidth / (rows)) - 2);
+    const dimen = ((puzzleWidth / (rows)) - 3);
     $(".puzzleSquare").css("height", dimen);
     $(".puzzleSquare").css("width", dimen);
 }
@@ -879,6 +879,10 @@ resizeGameBoard();
                 }
 
                 $('#solve').addClass('gameSolved');
+                const match = true;
+                const message = match ? "User won the game." : "User lost the game.";
+
+                sendEventToWebView(match, message);
 
             }
         };

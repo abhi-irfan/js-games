@@ -79,8 +79,6 @@ function updateGameBoard() {
 }
 
 
-
-
 // Define the function to check if the selected tiles are a match
 function checkMatch() {
     setTimeout(() => {

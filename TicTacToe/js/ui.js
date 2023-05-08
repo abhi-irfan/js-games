@@ -14,10 +14,10 @@ const svg_diag = '<svg class="crosses" aria-label="D1" role="img" viewBox="0 0 1
 
 var UI = {};
 
-UI.drawBoard = function() {
-	logger.log("Entering into drawBoard");
+UI.drawBoard = function () {
+    logger.log("Entering into drawBoard");
 
-	var gameboard_code = '\
+    var gameboard_code = '\
 			<div id="strike_row" class="container">' + svg_horizontal + '</div>\
 			<div id="strike_col" class="container">' + svg_vertical + '</div>\
 			<div id="strike_diag" class="container">' + svg_diag + '</div>\
@@ -42,198 +42,195 @@ UI.drawBoard = function() {
 				</tr>\
 			</table>';
 
-	document.getElementById("gameboard").innerHTML = gameboard_code ;
-	document.getElementById("messageboard").innerHTML = "<span><br>Hey there!! Pick a block.</span>";
+    document.getElementById("gameboard").innerHTML = gameboard_code;
+    document.getElementById("messageboard").innerHTML = "<span><br>Hey there!! Pick a block.</span>";
 
-	document.getElementById("score-x").innerHTML = "Human(X) - " + score_human;
-	document.getElementById("score-o").innerHTML = "Robot(O) - " + score_robot;
+    document.getElementById("score-x").innerHTML = "Human(X) - " + score_human;
+    document.getElementById("score-o").innerHTML = "Robot(O) - " + score_robot;
 
 }
 
-UI.drawSVG = function(cell, parGameState) {
-	logger.log("Entering into paintScreen");
-	logger.log(cell, parGameState);
-	
-	if(parGameState.TURN === parGameState.SYMBOL.human) {
-		document.getElementById(cell.id).innerHTML = svg_x;
-	} else if(parGameState.TURN === parGameState.SYMBOL.robot) {
-		document.getElementById(cell.id).innerHTML = svg_o;
-	}
+UI.drawSVG = function (cell, parGameState) {
+    logger.log("Entering into paintScreen");
+    logger.log(cell, parGameState);
+
+    if (parGameState.TURN === parGameState.SYMBOL.human) {
+        document.getElementById(cell.id).innerHTML = svg_x;
+    } else if (parGameState.TURN === parGameState.SYMBOL.robot) {
+        document.getElementById(cell.id).innerHTML = svg_o;
+    }
 }
 
-UI.animateGameOverCells = function(parGameState) {
-	logger.log("Entering into animateGameOverCells");
+UI.animateGameOverCells = function (parGameState) {
+    logger.log("Entering into animateGameOverCells");
 
-	var pos = parGameState.WINNING_LINE;
+    var pos = parGameState.WINNING_LINE;
 
-	if( pos != undefined ) {
-		if( (parGameState.SLASH_INFO).match(/strike_row/g) ) {
-			setTimeout(function() {
-				document.getElementById("strike_row").classList.add(parGameState.SLASH_INFO);
-				var div = document.getElementById("strike_row");
-				div.style.display = "block"; 
-			}, 1000);
-		}
-		else if( (parGameState.SLASH_INFO).match(/strike_col/g) ) {
-			setTimeout(function() {
-				document.getElementById("strike_col").classList.add(parGameState.SLASH_INFO);
-				var div = document.getElementById("strike_col");
-				div.style.display = "block"; 
-			}, 1000);
-		}
-		else if( (parGameState.SLASH_INFO).match(/strike_diag/g) ) {
-			setTimeout(function() {
-				document.getElementById("strike_diag").classList.add(parGameState.SLASH_INFO);
-				var div = document.getElementById("strike_diag");
-				div.style.display = "block"; 
-			}, 1000);
-		}
-	}
+    if (pos != undefined) {
+        if ((parGameState.SLASH_INFO).match(/strike_row/g)) {
+            setTimeout(function () {
+                document.getElementById("strike_row").classList.add(parGameState.SLASH_INFO);
+                var div = document.getElementById("strike_row");
+                div.style.display = "block";
+            }, 1000);
+        } else if ((parGameState.SLASH_INFO).match(/strike_col/g)) {
+            setTimeout(function () {
+                document.getElementById("strike_col").classList.add(parGameState.SLASH_INFO);
+                var div = document.getElementById("strike_col");
+                div.style.display = "block";
+            }, 1000);
+        } else if ((parGameState.SLASH_INFO).match(/strike_diag/g)) {
+            setTimeout(function () {
+                document.getElementById("strike_diag").classList.add(parGameState.SLASH_INFO);
+                var div = document.getElementById("strike_diag");
+                div.style.display = "block";
+            }, 1000);
+        }
+    }
 
-	// this is too bad logic, n^3
-	for (var row = 0; row < 3; row++) {
-		logger.log("	row=" + row);
-		for (var col = 0; col < 3; col++) {
-			logger.log("		col=" + col);
-			if( pos != undefined && ( 
-				   ( row === pos[0][0] && col === pos[0][1] ) 
-				|| ( row === pos[1][0] && col === pos[1][1] ) 
-				|| ( row === pos[2][0] && col === pos[2][1] ) ) ) {
-				logger.log("		pos=[" + row + "][" + col + "]");
-				continue;
-			}
-			logger.log("		adding class for cell-"+(row+1)+(col+1));
-			document.getElementById("cell-"+(row+1)+(col+1)).classList.add('lost-cells-gameover');
-		}
-	}
+    // this is too bad logic, n^3
+    for (var row = 0; row < 3; row++) {
+        logger.log("	row=" + row);
+        for (var col = 0; col < 3; col++) {
+            logger.log("		col=" + col);
+            if (pos != undefined && (
+                (row === pos[0][0] && col === pos[0][1])
+                || (row === pos[1][0] && col === pos[1][1])
+                || (row === pos[2][0] && col === pos[2][1]))) {
+                logger.log("		pos=[" + row + "][" + col + "]");
+                continue;
+            }
+            logger.log("		adding class for cell-" + (row + 1) + (col + 1));
+            document.getElementById("cell-" + (row + 1) + (col + 1)).classList.add('lost-cells-gameover');
+        }
+    }
 }
 
-UI.displaySledging = function() {
-	logger.log("Sledging Status :" +  alreadySledgedFlag.toString());
-	logger.log("Sledging Value  :" +  winLoseStreak.toString());
+UI.displaySledging = function () {
+    logger.log("Sledging Status :" + alreadySledgedFlag.toString());
+    logger.log("Sledging Value  :" + winLoseStreak.toString());
 
-	if( alreadySledgedFlag === 0 ) {
-			logger.log("Sledging Status :" +  alreadySledgedFlag.toString());
+    if (alreadySledgedFlag === 0) {
+        logger.log("Sledging Status :" + alreadySledgedFlag.toString());
 
-		if(winLoseStreak.valueOf() === 2) {
-			setTimeout(function() {
-				$('#sledgingModal').modal('show');
-			}, 5000);
+        if (winLoseStreak.valueOf() === 2) {
+            setTimeout(function () {
+                $('#sledgingModal').modal('show');
+            }, 5000);
 
-			alreadySledgedFlag = 1;
-		}
+            alreadySledgedFlag = 1;
+        }
 
-		if(winLoseStreak.valueOf() === -2) {
-			setTimeout(function() {
-				document.getElementById('sledgingModalId').innerHTML = "Too hard? Try changing difficulty level(s)";
-				$('#sledgingModal').modal('show');
-			}, 5000);
+        if (winLoseStreak.valueOf() === -2) {
+            setTimeout(function () {
+                document.getElementById('sledgingModalId').innerHTML = "Too hard? Try changing difficulty level(s)";
+                $('#sledgingModal').modal('show');
+            }, 5000);
 
-			alreadySledgedFlag = 1;
-		}
-	}
+            alreadySledgedFlag = 1;
+        }
+    }
 }
 
-UI.updateScreen = function(parGameState) {
-	logger.log("Entering into paintScreen");
+UI.updateScreen = function (parGameState) {
+    logger.log("Entering into paintScreen");
 
-	switch(parGameState.GAME_RESULT) {
-		case parGameState.RESULTS.incomplete: {
-			if(parGameState.TURN === parGameState.SYMBOL.robot){
-				// When current marker is 'X', then the next step will be by 'O', hence the below logic
-				document.getElementById("score-x").classList.remove('focus-score-x');
-				document.getElementById("score-o").classList.add('focus-score-o');
-				document.getElementById("messageboard").innerHTML = "<br>O's turn";
-			} 
-			else if(parGameState.TURN === parGameState.SYMBOL.human) {
-				document.getElementById("score-o").classList.remove('focus-score-o');
-				document.getElementById("score-x").classList.add('focus-score-x');
-				document.getElementById("messageboard").innerHTML = "<br>X's turn";
-			}
-		}
-		break;
+    switch (parGameState.GAME_RESULT) {
+        case parGameState.RESULTS.incomplete: {
+            if (parGameState.TURN === parGameState.SYMBOL.robot) {
+                // When current marker is 'X', then the next step will be by 'O', hence the below logic
+                document.getElementById("score-x").classList.remove('focus-score-x');
+                document.getElementById("score-o").classList.add('focus-score-o');
+                document.getElementById("messageboard").innerHTML = "<br>O's turn";
+            } else if (parGameState.TURN === parGameState.SYMBOL.human) {
+                document.getElementById("score-o").classList.remove('focus-score-o');
+                document.getElementById("score-x").classList.add('focus-score-x');
+                document.getElementById("messageboard").innerHTML = "<br>X's turn";
+            }
+        }
+            break;
 
-		///////////////////////////////////////////////////////////
-		case parGameState.RESULTS.playerXWon: {
-			document.getElementById("messageboard").innerHTML = "<br> Gameover";
-			document.getElementById("score-o").classList.add('focus-score-o');
-			document.getElementById("score-x").classList.add('focus-score-x');
+        ///////////////////////////////////////////////////////////
+        case parGameState.RESULTS.playerXWon: {
+            document.getElementById("messageboard").innerHTML = "<br> Gameover";
+            document.getElementById("score-o").classList.add('focus-score-o');
+            document.getElementById("score-x").classList.add('focus-score-x');
 
-			UI.animateGameOverCells(parGameState);
+            UI.animateGameOverCells(parGameState);
 
-			document.getElementById("score-x").innerHTML = "Human(X) - " + score_human;
-			document.getElementById("score-o").innerHTML = "Robot(O) - " + score_robot;
+            document.getElementById("score-x").innerHTML = "Human(X) - " + score_human;
+            document.getElementById("score-o").innerHTML = "Robot(O) - " + score_robot;
 
-			setTimeout(function() {
-				var div = document.getElementById("x-won");
-				div.style.display = "block"; 
-				document.getElementById("x-won").addEventListener("click", startGame, false);
-			}, 4000);
+            setTimeout(function () {
+                var div = document.getElementById("x-won");
+                div.style.display = "block";
+                document.getElementById("x-won").addEventListener("click", startGame, false);
+            }, 4000);
 
-			if(winLoseStreak >= 0) 
-				winLoseStreak++;
-			else
-				winLoseStreak = 0;
+            if (winLoseStreak >= 0)
+                winLoseStreak++;
+            else
+                winLoseStreak = 0;
 
-			UI.displaySledging();
-		}
-		break;
+            UI.displaySledging();
+        }
+            break;
 
-		///////////////////////////////////////////////////////////
-		case parGameState.RESULTS.playerOWon: {
-			document.getElementById("messageboard").innerHTML = "<br> Gameover";
-			document.getElementById("score-o").classList.add('focus-score-o');
-			document.getElementById("score-x").classList.add('focus-score-x');
+        ///////////////////////////////////////////////////////////
+        case parGameState.RESULTS.playerOWon: {
+            document.getElementById("messageboard").innerHTML = "<br> Gameover";
+            document.getElementById("score-o").classList.add('focus-score-o');
+            document.getElementById("score-x").classList.add('focus-score-x');
 
-			UI.animateGameOverCells(parGameState);
+            UI.animateGameOverCells(parGameState);
 
-			document.getElementById("score-x").innerHTML = "Human(X) - " + score_human;
-			document.getElementById("score-o").innerHTML = "Robot(O) - " + score_robot;
-			
-			setTimeout(function() {
-				var div = document.getElementById("o-won");
-				div.style.display = "block"; 
-				document.getElementById("o-won").addEventListener("click", startGame, false);
-			}, 4000);
+            document.getElementById("score-x").innerHTML = "Human(X) - " + score_human;
+            document.getElementById("score-o").innerHTML = "Robot(O) - " + score_robot;
 
-
-			if(winLoseStreak <= 0) 
-				winLoseStreak--;
-			else
-				winLoseStreak = 0;
-
-			UI.displaySledging();
-		}
-		break;
-
-		///////////////////////////////////////////////////////////
-		case parGameState.RESULTS.tie: {
-			document.getElementById("messageboard").innerHTML = "<br> Gameover";
-			document.getElementById("score-o").classList.add('focus-score-o');
-			document.getElementById("score-x").classList.add('focus-score-x');
-
-			UI.animateGameOverCells(parGameState);
-
-			document.getElementById("score-x").innerHTML = "Human(X) - " + score_human;
-			document.getElementById("score-o").innerHTML = "Robot(O) - " + score_robot;
-
-			setTimeout(function() {
-				var div = document.getElementById("tie");
-				div.style.display = "block"; 
-				document.getElementById("tie").addEventListener("click", startGame, false);
-			}, 4000);
+            setTimeout(function () {
+                var div = document.getElementById("o-won");
+                div.style.display = "block";
+                document.getElementById("o-won").addEventListener("click", startGame, false);
+            }, 4000);
 
 
-			winLoseStreak = 0; 
-		}
-		break;
+            if (winLoseStreak <= 0)
+                winLoseStreak--;
+            else
+                winLoseStreak = 0;
 
-		///////////////////////////////////////////////////////////
-		default: {
-			logger.log("What the hell happened?");
-			document.getElementById("messageboard").innerHTML = "<br>what the hell just happened? huh?";
-			document.getElementById("score-o").classList.add('focus-score-o');
-			document.getElementById("score-x").classList.add('focus-score-x');
-		}
-	}
+            UI.displaySledging();
+        }
+            break;
+
+        ///////////////////////////////////////////////////////////
+        case parGameState.RESULTS.tie: {
+            document.getElementById("messageboard").innerHTML = "<br> Gameover";
+            document.getElementById("score-o").classList.add('focus-score-o');
+            document.getElementById("score-x").classList.add('focus-score-x');
+
+            UI.animateGameOverCells(parGameState);
+
+            document.getElementById("score-x").innerHTML = "Human(X) - " + score_human;
+            document.getElementById("score-o").innerHTML = "Robot(O) - " + score_robot;
+
+            setTimeout(function () {
+                var div = document.getElementById("tie");
+                div.style.display = "block";
+                document.getElementById("tie").addEventListener("click", startGame, false);
+            }, 4000);
+
+
+            winLoseStreak = 0;
+        }
+            break;
+
+        ///////////////////////////////////////////////////////////
+        default: {
+            logger.log("What the hell happened?");
+            document.getElementById("messageboard").innerHTML = "<br>what the hell just happened? huh?";
+            document.getElementById("score-o").classList.add('focus-score-o');
+            document.getElementById("score-x").classList.add('focus-score-x');
+        }
+    }
 }

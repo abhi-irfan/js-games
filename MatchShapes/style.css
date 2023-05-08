@@ -1,4 +1,4 @@
-body{
+body {
     background: #C6D5DE;
     font-family: 'Poppins', sans-serif !important;
 }
@@ -24,7 +24,7 @@ body{
     align-items: center;
 }
 
-#game-board-title{
+#game-board-title {
     padding: 32px;
     text-align: center;
 }

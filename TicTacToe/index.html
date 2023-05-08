@@ -1,154 +1,160 @@
-	<!doctype html>
+<!doctype html>
 
-	<html lang="en">
+<html lang="en">
 
-	<head>
-		<!-- Required meta tags -->
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
-		<title>Tic Tac Toe</title>
+    <title>Tic Tac Toe</title>
 
-		<!-- font for my branding name -->
-		<link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+    <!-- font for my branding name -->
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
 
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" rel="stylesheet">
 
-		<link rel="stylesheet" href="css/styles.css">
-		<script src="js/logger.js"></script>
-		<script src="js/game_state.js"></script>
-		<script src="js/ai.js"></script>
-		<script src="js/ui.js"></script>
-		<script src="js/script.js"></script>
-	</head>
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="js/logger.js"></script>
+    <script src="js/game_state.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/script.js"></script>
+</head>
 
-	<body>
-		<header>
-			<nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse">
-				<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+<body>
+<header>
+    <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse">
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler navbar-toggler-right" data-target="#navbarSupportedContent" data-toggle="collapse"
+                type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item ">
-							<a class="nav-link" href="#">Easy<span class="sr-only"></span></a>
-						</li>
-						<li class="nav-item active">
-							<a class="nav-link" href="#">Medium</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Hard</a>
-						</li>
-					</ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="#">Easy<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Medium</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Hard</a>
+                </li>
+            </ul>
 
-					<!-- this is hidden on anything which is larger than md size -->
-					<hr class="d-md-none">
+            <!-- this is hidden on anything which is larger than md size -->
+            <hr class="d-md-none">
 
-					<form class="form-inline my-2 my-lg-0" style="justify-content: space-between;">
-						<input id="how_to_play" class="btn my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModal" value="How To Play?">
-						<button class="btn btn-outline-secondary my-2 my-sm-0 disabled" aria-disabled="true" >Reset</button>
-					</form>
-				</div>
-			</nav>
-		</header>
-		<div id="scoreboard" class="container">
-			<table class="table text-center">
-				<tr>
-					<td colspan=2>
-						<span>Score</span>
-					</td>
-				</tr>
-				<tr class="btn-group">
-					<td id="score-x" class="btn focus-score-x">X - x</td>
-					<td id="score-o" class="btn focus-score-o">O - o</td>
-				</tr>
-				<tr>
-					<td id="messageboard" colspan=2>
-						<!-- This code will be injected at runtime from the JS -->
-					</td>
-				</tr>
-			</table>
-		</div>
+            <form class="form-inline my-2 my-lg-0" style="justify-content: space-between;">
+                <input class="btn my-2 my-sm-0" data-target="#exampleModal" data-toggle="modal" id="how_to_play"
+                       type="button" value="How To Play?">
+                <button aria-disabled="true" class="btn btn-outline-secondary my-2 my-sm-0 disabled">Reset</button>
+            </form>
+        </div>
+    </nav>
+</header>
+<div class="container" id="scoreboard">
+    <table class="table text-center">
+        <tr>
+            <td colspan=2>
+                <span>Score</span>
+            </td>
+        </tr>
+        <tr class="btn-group">
+            <td class="btn focus-score-x" id="score-x">X - x</td>
+            <td class="btn focus-score-o" id="score-o">O - o</td>
+        </tr>
+        <tr>
+            <td colspan=2 id="messageboard">
+                <!-- This code will be injected at runtime from the JS -->
+            </td>
+        </tr>
+    </table>
+</div>
 
-		<div id="gameboard" class="container">
-			<!-- This code will be injected at runtime from the JS -->
-		</div>
-	 	
-		<div class="container text-center">
-			<div id="restartgame" class="btn" role="button">
-				Restart Game
-			</div>		
-		</div>
+<div class="container" id="gameboard">
+    <!-- This code will be injected at runtime from the JS -->
+</div>
 
-		<!-- Modal that will be invoked the the player is on a losing/winning streak -->
-		<div class="modal fade" id="sledgingModal" tabindex="-1" role="dialog" 
-			aria-hidden="true">
-		 	<div class="modal-dialog modal-dialog-centered" role="document">
-		    	<div class="modal-content">
-		      		<div  class="modal-body">
-						<span id="sledgingModalId" aria-hidden="true">Too easy? Try changing difficulty level(s).</span>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-					  	</button>
-					</div>		      		
-		    	</div>
-		  	</div>
-		</div>
-		
-		<!-- Modal that will be invoked when we click on the how to play -->
-		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" 
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-		 	<div class="modal-dialog" role="document">
-		    	<div class="modal-content">
-		      		<div class="modal-header">
-		        		<h5 class="modal-title" id="exampleModalLabel">How to play</h5>
-		        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          			<span aria-hidden="true">&times;</span>
-		        		</button>
-		      		</div>
-		      		<div class="modal-body">
-						Tic-tac-toe is a game for two players, X (human) and O (robot), who take turns marking the spaces in a 3×3 grid. 
-						<br><br>
-						The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game.
-						<br><br>
-						These are the various winning positions,
-						<br>
-					
-						<img src="images/X-wins.gif" alt="X winning ">
-						<img src="images/O-wins.gif" alt="O Winning">
-						<img src="images/XO-tie.gif" alt="Tied game">
-						
-						<img src="images/tic-tac-toe-how-to.jpg" alt="Winning positions">
-		      		</div>
-		      		<div class="modal-footer">
-		        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Got it.</button>
-		      		</div>
-		    	</div>
-		  	</div>
-		</div>
+<div class="container text-center">
+    <div class="btn" id="restartgame" role="button">
+        Restart Game
+    </div>
+</div>
+
+<!-- Modal that will be invoked the the player is on a losing/winning streak -->
+<div aria-hidden="true" class="modal fade" id="sledgingModal" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <span aria-hidden="true" id="sledgingModalId">Too easy? Try changing difficulty level(s).</span>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal that will be invoked when we click on the how to play -->
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
+     role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">How to play</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Tic-tac-toe is a game for two players, X (human) and O (robot), who take turns marking the spaces in a
+                3×3 grid.
+                <br><br>
+                The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins
+                the game.
+                <br><br>
+                These are the various winning positions,
+                <br>
+
+                <img alt="X winning " src="images/X-wins.gif">
+                <img alt="O Winning" src="images/O-wins.gif">
+                <img alt="Tied game" src="images/XO-tie.gif">
+
+                <img alt="Winning positions" src="images/tic-tac-toe-how-to.jpg">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Got it.</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-		<footer>
-		</footer>
+<footer>
+</footer>
 
-		<!-- START - Below items are for Bootstrap to work -->
-		<script 
-			src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
-			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
-			crossorigin="anonymous">
-		</script>
-		<script 
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
-			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
-			crossorigin="anonymous">
-		</script>
-		<script 
-			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
-			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
-			crossorigin="anonymous">
-		</script>
-		<!-- END   - Below items are for Bootstrap to work -->
-	</body>
+<!-- START - Below items are for Bootstrap to work -->
+<script
+        crossorigin="anonymous"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js">
+</script>
+<script
+        crossorigin="anonymous"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js">
+</script>
+<script
+        crossorigin="anonymous"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
+</script>
+<!-- END   - Below items are for Bootstrap to work -->
+</body>
 </html>

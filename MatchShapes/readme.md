@@ -1,8 +1,7 @@
-
-
 # Shape Match Memory Game
 
-A simple memory game where the player matches pairs of shapes on a 2x2 board. Randomly generated shapes keep the game fun and challenging. Built with HTML, CSS, and JavaScript.
+A simple memory game where the player matches pairs of shapes on a 2x2 board. Randomly generated shapes keep the game
+fun and challenging. Built with HTML, CSS, and JavaScript.
 
 ## Features
 

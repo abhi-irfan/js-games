@@ -14,16 +14,22 @@ let secondTile = null;
 function resizeGameBoard() {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    const tileSize = Math.min(screenWidth * 0.8 / 2, screenHeight * 0.8 / 2);
+    const tileSize = Math.min(screenWidth * 0.9 / 2, screenHeight * 0.9 / 2);
     const boardWidth = tileSize * 2;
     const boardHeight = tileSize * 2;
     const board = document.getElementById('game-board');
     board.style.width = boardWidth + 'px';
-    board.style.height = (boardHeight) + 'px';
     const boardBody = document.getElementById('game-board-body');
-    const height = document.getElementById("game-board-title").offsetHeight
-    boardBody.style.width = (boardWidth - height) + 'px';
-    boardBody.style.height = (boardHeight - height) + 'px';
+    const height = document.getElementById("game-board-title").offsetHeight + 18
+    if(boardWidth + height < screenHeight) {
+        boardBody.style.width = (boardWidth) + 'px';
+        boardBody.style.height = (boardHeight) + 'px';
+        board.style.height = (boardHeight+height) + 'px';
+    }else {
+        boardBody.style.width = (boardWidth - height) + 'px';
+        boardBody.style.height = (boardHeight - height) + 'px';
+        board.style.height = (boardHeight) + 'px';
+    }
 }
 
 window.onresize = function () {

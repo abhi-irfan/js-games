@@ -97,7 +97,7 @@ function checkMatch() {
             } else if (/iPhone|iPad|iPod|iOS/.test(navigator.userAgent)) {
                 // The WebView is on an iOS device
                 if (typeof webkit !== "undefined") {
-                    window.webkit.messageHandlers.MyApp.postMessage({ event: match ? "onSuccess" : "onFailure", data: "");
+                    window.webkit.messageHandlers.MyApp.postMessage({ event: match ? "onSuccess" : "onFailure", data: ""});
                 } else {
                     console.error("webkit object is not defined.");
                 }

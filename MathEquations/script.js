@@ -27,9 +27,11 @@ function resetGame(){
         correctAnswer = eval(equation);
         possibleAnswers = [correctAnswer, correctAnswer + 1, correctAnswer - 1, correctAnswer + 2];
     } else if (difficulty === "m") {
-        num1 = Math.floor(Math.random() * 51) + 50;
-        num2 = Math.floor(Math.random() * 51) + 50;
         operator1 = ["+", "-", "*"][Math.floor(Math.random() * 3)];
+        if (operator1 === "*"){
+            num1 = Math.floor(Math.random() * 10) + 1;
+            num2 = Math.floor(Math.random() * 10) + 1;
+        }
         equation = num1 + " " + operator1 + " " + num2;
         correctAnswer = eval(equation);
         possibleAnswers = [correctAnswer, correctAnswer + 5, correctAnswer - 5, correctAnswer + 10];

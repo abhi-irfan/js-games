@@ -1,0 +1,68 @@
+body {
+    background: #C6D5DE;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#game-board {
+    margin: auto;
+    padding: 0.5%;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-board-body {
+    display: flex;
+    flex-wrap: wrap;
+    background: transparent;
+    margin: auto;
+    padding: 0.5%;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-board-title {
+    padding: 32px;
+    text-align: center;
+}
+#game-board-problem {
+    padding: 32px;
+    text-align: center;
+    font-size: 22px;
+}
+
+
+.tile {
+    width: 48%;
+    height: 46%;
+    margin: 1%;
+    background-color: white;
+    cursor: pointer;
+    padding: 10px;
+    position: relative;
+}
+
+.tile.selected {
+    position: relative;
+}
+
+.tile .answer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+}
+
+#reset-btn {
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}

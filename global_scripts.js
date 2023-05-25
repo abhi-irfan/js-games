@@ -1,5 +1,6 @@
 function sendEventToWebView(match, message) {
     try {
+        console.info("match status:"+match);
         if (/Android/.test(navigator.userAgent)) {
             // The WebView is on an Android device
             if (typeof MyApp !== "undefined") {

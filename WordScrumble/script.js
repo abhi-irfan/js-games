@@ -768,11 +768,12 @@ resizeGameBoard();
          *
          */
         var endTurn = function () {
-
+            let match = false;
             // see if we formed a valid word
             for (var i = 0, len = wordList.length; i < len; i++) {
 
                 if (wordList[i] === curWord) {
+                    match = true;
                     $('.selected').addClass('found');
                     wordList.splice(i, 1);
                     $('.' + curWord).addClass('wordFound');
@@ -789,6 +790,10 @@ resizeGameBoard();
             selectedSquares = [];
             curWord = '';
             curOrientation = null;
+            if (match) {
+                const message = match ? "User won the game." : "User lost the game.";
+                sendEventToWebView(match, message);
+            }
         };
 
         /**

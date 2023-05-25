@@ -42,6 +42,15 @@ function resetGame(){
         do {
             operator2 = ["+", "-", "*"][Math.floor(Math.random() * 3)];
         } while (operator2 === operator1);
+        if (operator1 === "*"){
+            num1 = Math.floor(Math.random() * 10) + 1;
+            num2 = Math.floor(Math.random() * 10) + 1;
+            num3 = Math.floor(Math.random() * 51) + 50;
+        } else if (operator2 === "*"){
+            num1 = Math.floor(Math.random() * 51) + 50;
+            num2 = Math.floor(Math.random() * 10) + 1;
+            num3 = Math.floor(Math.random() * 10) + 1;
+        }
         equation = num1 + " " + operator1 + " (" + num2 + " " + operator2 + " " + num3 + ")";
         correctAnswer = eval(equation);
         possibleAnswers = [correctAnswer, correctAnswer + 10, correctAnswer - 10, correctAnswer + 20];

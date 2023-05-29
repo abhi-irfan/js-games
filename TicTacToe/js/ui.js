@@ -158,7 +158,7 @@ UI.updateScreen = function (parGameState) {
                 var div = document.getElementById("x-won");
                 div.style.display = "block";
                 document.getElementById("x-won").addEventListener("click", startGame, false);
-                sendEventToWebView(true,"You won the game")
+                sendEventToWebView(true,"You won the game.")
             }, 4000);
 
             if (winLoseStreak >= 0)

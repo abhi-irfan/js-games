@@ -21,8 +21,8 @@ UI.drawBoard = function () {
 			<div id="strike_row" class="container">' + svg_horizontal + '</div>\
 			<div id="strike_col" class="container">' + svg_vertical + '</div>\
 			<div id="strike_diag" class="container">' + svg_diag + '</div>\
-			<div id="x-won" class="container">' + svg_x + '<span>WINNER</span></div>\
-			<div id="o-won" class="container">' + svg_o + '<span>LOSS</span></div>\
+			<div id="x-won" class="container">' + svg_x + '<span>You won</span></div>\
+			<div id="o-won" class="container">' + svg_o + '<span>You lost</span></div>\
 			<div id="tie"   class="container">' + svg_xo + '<span>It\'s a TIE</span></div>\
 			<table class="table text-center">\
 				<tr class="c_row_1">\

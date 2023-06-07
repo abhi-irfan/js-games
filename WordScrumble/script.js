@@ -16,11 +16,14 @@ function resizeGameBoard() {
         boardBody.style.width = (boardWidth - height) + 'px';
         boardBody.style.height = (boardHeight - height) + 'px';
     }
-    let rows = getRowsByDifficulty();
-    const puzzleWidth = document.getElementById("puzzle").offsetWidth
-    const dimen = ((puzzleWidth / (rows)) - 3);
-    $(".puzzleSquare").css("height", dimen);
-    $(".puzzleSquare").css("width", dimen);
+    let maxWidth = $(".puzzleSquare").css("width");
+    $(".puzzleSquare").each(function(){
+        if(maxWidth < $(this).css("width")){
+            maxWidth = $(this).css("width");
+        }
+    })
+    $(".puzzleSquare").css("height", maxWidth);
+    $(".puzzleSquare").css("width", maxWidth);
 }
 
 window.onresize = function () {
@@ -920,21 +923,35 @@ function getRowsByDifficulty() {
 }
 
 $(function () {
-    const words = ['dhanu'];
-
+    let words = ['dhanu'];
     let rows = getRowsByDifficulty();
-    // start a word find game
-    var gamePuzzle = wordfindgame.create(
-        words,
-        '#puzzle',
-        '#words',
-        {
-            height: rows,
-            width: rows,
-            fillBlanks: true
+    let randomElement = [rows-1, rows, rows-2][Math.floor(Math.random() * 3)];
+    if(rows >= 7){
+        randomElement = [rows-1, rows, rows-2, rows-3, rows-4][Math.floor(Math.random() * 3)];
+    }
+
+    generateRandomWord(randomElement).then((randomWord) => {
+        words = [];
+        words.push(randomWord);
+        // start a word find game
+        const gamePuzzle = wordfindgame.create(
+            words,
+            '#puzzle',
+            '#words',
+            {
+                height: rows,
+                width: rows,
+                fillBlanks: true
+            });
+        $('#solve').click(function () {
+            wordfindgame.solve(gamePuzzle, words);
         });
-    $('#solve').click(function () {
-        wordfindgame.solve(gamePuzzle, words);
+        resizeGameBoard();
     });
-    resizeGameBoard();
 });
+
+async function generateRandomWord(length) {
+    const response = await fetch(`https://random-word-api.herokuapp.com/word?number=1&length=${length}`);
+    const data = await response.json();
+    return data[0];
+}

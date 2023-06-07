@@ -39,22 +39,25 @@ body {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
+    gap: 1px;
 }
 
 #puzzle div {
     width: 100%;
+    display: flex;
+    gap: 1px;
+    flex-direction: row;
 }
 
 /* style for each square in the puzzle */
 #puzzle .puzzleSquare {
-    height: 30px;
-    width: 30px;
+    height: 100%;
+    width: 100%;
     text-transform: uppercase;
     border: 0;
     outline: none;
     color: #80B8DB;
     border: 1px solid gray;
-    margin: 1px;
     font-weight: 900;
     font-size: 18px;
 }
@@ -130,4 +133,11 @@ button::-moz-focus-inner {
 
 #solve:hover, #solve.gameSolved {
     opacity: 1;
+}
+@media only screen and (max-width: 360px) {
+    /* Styles for devices with width less than or equal to 360px */
+    #puzzle .puzzleSquare {
+        font-size: 12px;
+    }
+    /* Add more styles here */
 }

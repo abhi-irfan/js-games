@@ -106,9 +106,9 @@ resizeGameBoard();
 // Define the function to handle the click event on a tile
 function handleTileClick(tileId) {
     tiles[tileId].selected = true;
-    let message = "User lost the game.";
+    let message = "You lost.";
     if(correctAnswer === tiles[tileId].value){
-        message = "User won the game.";
+        message = "You solved it!";
         sendEventToWebView(true, message);
         resetGame();
     } else {

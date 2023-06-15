@@ -129,7 +129,7 @@ function updateGameBoard() {
 function checkMatch() {
     setTimeout(() => {
         const match = firstTile.shape === secondTile.shape;
-        const message = match ? "User won the game." : "User lost the game.";
+        const message = match ? "You solved it!" : "You lost.";
 
         sendEventToWebView(match, message);
 

@@ -158,7 +158,7 @@ UI.updateScreen = function (parGameState) {
                 var div = document.getElementById("x-won");
                 div.style.display = "block";
                 document.getElementById("x-won").addEventListener("click", startGame, false);
-                sendEventToWebView(true,"You won the game.")
+                sendEventToWebView(true,"You won!")
             }, 4000);
 
             if (winLoseStreak >= 0)
@@ -185,7 +185,7 @@ UI.updateScreen = function (parGameState) {
                 var div = document.getElementById("o-won");
                 div.style.display = "block";
                 document.getElementById("o-won").addEventListener("click", startGame, false);
-                sendEventToWebView(false,"You lost the game")
+                sendEventToWebView(false,"You lost.")
             }, 4000);
 
 
@@ -213,7 +213,7 @@ UI.updateScreen = function (parGameState) {
                 var div = document.getElementById("tie");
                 div.style.display = "block";
                 document.getElementById("tie").addEventListener("click", startGame, false);
-                sendEventToWebView(false,"Its a Tie")
+                sendEventToWebView(false,"It is a tie!")
             }, 4000);
 
 

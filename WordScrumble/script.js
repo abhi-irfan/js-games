@@ -8,9 +8,17 @@ function resizeGameBoard() {
     board.style.width = boardWidth + 'px';
     board.style.height = (boardHeight) + 'px';
     const boardBody = document.getElementById('game-board-body');
-    let height = document.getElementById("game-board-title").offsetHeight + document.getElementById("words").offsetHeight
-    boardBody.style.width = (boardWidth - height) + 'px';
-    boardBody.style.height = (boardHeight - height) + 'px';
+    let height = document.getElementById("game-board-title").offsetHeight + document.getElementById("words").offsetHeight;
+    let browserWidth = window.innerWidth;
+    let browserHeight = window.innerHeight - height;
+    if (browserHeight > browserWidth){
+        boardBody.style.width = (boardWidth) + 'px';
+        boardBody.style.height = (boardHeight ) + 'px';
+    } else {
+        boardBody.style.width = (boardWidth - height) + 'px';
+        boardBody.style.height = (boardHeight - height) + 'px';
+    }
+
     let rows = getRowsByDifficulty();
     const puzzleWidth = document.getElementById("puzzle").offsetWidth
     const dimen = ((puzzleWidth / (rows)) - 3);

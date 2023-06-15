@@ -1,7 +1,7 @@
 function resizeGameBoard() {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    const tileSize = Math.min(screenWidth * 0.9 / 2, screenHeight * 0.9 / 2);
+    const tileSize = Math.min(screenWidth * 0.8 / 2, screenHeight * 0.8 / 2);
     const boardWidth = tileSize * 2;
     const boardHeight = tileSize * 2;
     const board = document.getElementById('game-board');
@@ -9,21 +9,13 @@ function resizeGameBoard() {
     board.style.height = (boardHeight) + 'px';
     const boardBody = document.getElementById('game-board-body');
     let height = document.getElementById("game-board-title").offsetHeight + document.getElementById("words").offsetHeight
-    if(boardWidth + height < screenHeight) {
-        boardBody.style.width = (boardWidth) + 'px';
-        boardBody.style.height = (boardHeight) + 'px';
-    }else {
-        boardBody.style.width = (boardWidth - height) + 'px';
-        boardBody.style.height = (boardHeight - height) + 'px';
-    }
-    let maxWidth = $(".puzzleSquare").css("width");
-    $(".puzzleSquare").each(function(){
-        if(maxWidth < $(this).css("width")){
-            maxWidth = $(this).css("width");
-        }
-    })
-    $(".puzzleSquare").css("height", maxWidth);
-    $(".puzzleSquare").css("width", maxWidth);
+    boardBody.style.width = (boardWidth - height) + 'px';
+    boardBody.style.height = (boardHeight - height) + 'px';
+    let rows = getRowsByDifficulty();
+    const puzzleWidth = document.getElementById("puzzle").offsetWidth
+    const dimen = ((puzzleWidth / (rows)) - 3);
+    $(".puzzleSquare").css("height", dimen);
+    $(".puzzleSquare").css("width", dimen);
 }
 
 window.onresize = function () {
@@ -911,6 +903,15 @@ resizeGameBoard();
 
 function getRowsByDifficulty() {
     const difficulty = findGetParameter("difficulty") ?? 'l';
+    const mode = findGetParameter("mode") ?? 'lite';
+    if(mode === "dark"){
+        document.body.style.background = "#000";
+        document.getElementById("game-board-title").style.color = "#FFF"
+        var myElements = document.getElementsByClassName("word")
+        for (var i = 0; i < myElements.length; i++) {
+            myElements[i].style.color = "#FFF";
+        }
+    }
     let rows = 5;
     if (difficulty === 'l') {
         rows = 5;

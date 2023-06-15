@@ -915,6 +915,9 @@ function getRowsByDifficulty() {
     if(mode === "dark"){
         document.body.style.background = "#000";
         document.getElementById("game-board-title").style.color = "#FFF"
+        document.getElementById("game-board-body").style.background = "#212121"
+        $("#puzzle .puzzleSquare").css("background","#1f2023")
+        $("#puzzle .puzzleSquare").css("color","#6391b3")
         var myElements = document.getElementsByClassName("word")
         for (var i = 0; i < myElements.length; i++) {
             myElements[i].style.color = "#FFF";

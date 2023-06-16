@@ -791,7 +791,7 @@ resizeGameBoard();
             curWord = '';
             curOrientation = null;
             if (match) {
-                const message = match ? "User won the game." : "User lost the game.";
+                const message = match ? "You solved it!" : "You lost.";
                 sendEventToWebView(match, message);
             }
         };
@@ -890,7 +890,7 @@ resizeGameBoard();
 
                 $('#solve').addClass('gameSolved');
                 const match = true;
-                const message = match ? "User won the game." : "User lost the game.";
+                const message = match ? "You solved it!" : "You lost.";
 
                 sendEventToWebView(match, message);
 

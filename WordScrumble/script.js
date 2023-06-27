@@ -1,21 +1,24 @@
 function resizeGameBoard() {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    const tileSize = Math.min(screenWidth * 0.9 / 2, screenHeight * 0.9 / 2);
+    const tileSize = Math.min(screenWidth * 0.8 / 2, screenHeight * 0.8 / 2);
     const boardWidth = tileSize * 2;
     const boardHeight = tileSize * 2;
     const board = document.getElementById('game-board');
     board.style.width = boardWidth + 'px';
     board.style.height = (boardHeight) + 'px';
     const boardBody = document.getElementById('game-board-body');
-    let height = document.getElementById("game-board-title").offsetHeight + document.getElementById("words").offsetHeight
-    if(boardWidth + height < screenHeight) {
+    let height = document.getElementById("game-board-title").offsetHeight + document.getElementById("words").offsetHeight;
+    let browserWidth = window.innerWidth;
+    let browserHeight = window.innerHeight - height;
+    if (browserHeight > browserWidth){
         boardBody.style.width = (boardWidth) + 'px';
-        boardBody.style.height = (boardHeight) + 'px';
-    }else {
+        boardBody.style.height = (boardHeight ) + 'px';
+    } else {
         boardBody.style.width = (boardWidth - height) + 'px';
         boardBody.style.height = (boardHeight - height) + 'px';
     }
+
     let rows = getRowsByDifficulty();
     const puzzleWidth = document.getElementById("puzzle").offsetWidth
     const dimen = ((puzzleWidth / (rows)) - 3);
@@ -908,6 +911,18 @@ resizeGameBoard();
 
 function getRowsByDifficulty() {
     const difficulty = findGetParameter("difficulty") ?? 'l';
+    const mode = findGetParameter("mode") ?? 'lite';
+    if(mode === "dark"){
+        document.body.style.background = "#000";
+        document.getElementById("game-board-title").style.color = "#FFF"
+        document.getElementById("game-board-body").style.background = "#212121"
+        $("#puzzle .puzzleSquare").css("background","#1f2023")
+        $("#puzzle .puzzleSquare").css("color","#6391b3")
+        var myElements = document.getElementsByClassName("word")
+        for (var i = 0; i < myElements.length; i++) {
+            myElements[i].style.color = "#FFF";
+        }
+    }
     let rows = 5;
     if (difficulty === 'l') {
         rows = 5;
@@ -920,21 +935,35 @@ function getRowsByDifficulty() {
 }
 
 $(function () {
-    const words = ['dhanu'];
-
+    let words = ['dhanu'];
     let rows = getRowsByDifficulty();
-    // start a word find game
-    var gamePuzzle = wordfindgame.create(
-        words,
-        '#puzzle',
-        '#words',
-        {
-            height: rows,
-            width: rows,
-            fillBlanks: true
+    let randomElement = [rows-1, rows, rows-2][Math.floor(Math.random() * 3)];
+    if(rows >= 7){
+        randomElement = [rows-1, rows, rows-2, rows-3, rows-4][Math.floor(Math.random() * 3)];
+    }
+
+    generateRandomWord(randomElement).then((randomWord) => {
+        words = [];
+        words.push(randomWord);
+        // start a word find game
+        const gamePuzzle = wordfindgame.create(
+            words,
+            '#puzzle',
+            '#words',
+            {
+                height: rows,
+                width: rows,
+                fillBlanks: true
+            });
+        $('#solve').click(function () {
+            wordfindgame.solve(gamePuzzle, words);
         });
-    $('#solve').click(function () {
-        wordfindgame.solve(gamePuzzle, words);
+        resizeGameBoard();
     });
-    resizeGameBoard();
 });
+
+async function generateRandomWord(length) {
+    const response = await fetch(`https://random-word-api.herokuapp.com/word?number=1&length=${length}`);
+    const data = await response.json();
+    return data[0];
+}

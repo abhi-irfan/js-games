@@ -12,7 +12,12 @@ function resetGame(){
     const myDiv = document.getElementById("game-board-body");
     myDiv.innerHTML = "";
     const difficulty = findGetParameter("difficulty") ?? 'l';
-
+    const mode = findGetParameter("mode") ?? 'lite';
+    if(mode === "dark"){
+        document.body.style.background = "#000";
+        document.getElementById("game-board-title").style.color = "#FFF"
+        document.getElementById("game-board-problem").style.color = "#FFF"
+    }
     let num1 = Math.floor(Math.random() * 10) + 1;
     let num2 = Math.floor(Math.random() * 10) + 1;
     let num3 = Math.floor(Math.random() * 10) + 1;

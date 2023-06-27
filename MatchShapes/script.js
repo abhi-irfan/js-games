@@ -13,7 +13,11 @@ let secondTile = null;
 $(document).ready(function () {
 
     const difficulty = findGetParameter("difficulty") ?? 'l';
-
+    const mode = findGetParameter("mode") ?? 'lite';
+    if(mode === "dark"){
+        document.body.style.background = "#000";
+        document.getElementById("game-board-title").style.color = "#FFF"
+    }
     if (difficulty === 'l') {
 
     } else if (difficulty === 'm') {
